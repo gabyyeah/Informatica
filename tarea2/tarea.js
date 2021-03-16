@@ -23,11 +23,11 @@ function addNota(){
     console.log(tareaNueva)
 
     tareas.push(tareaNueva)
-    llenarTabla();
+    llenarTabla()
     localStorage.setItem("tareas", JSON.stringify(tareas))
 }
 
-form.onsubmit = addNota;
-;
+form.onsubmit = addNota
+
 
 llenarTabla();
