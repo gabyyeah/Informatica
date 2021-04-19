@@ -11,8 +11,8 @@ function dibujarPeon (xC, yC, r){
     ctx.fillStyle='black'
 
     ctx.moveTo(xC,yC)
-    ctx.lineTo(xC-10,yC+22)
-    ctx.lineTo(xC+10, yC+22)
+    ctx.lineTo(xC-10,yC+25)
+    ctx.lineTo(xC+10, yC+25)
     ctx.lineTo(xC,yC)
 
     ctx.stroke()
