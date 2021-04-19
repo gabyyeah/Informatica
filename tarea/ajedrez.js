@@ -1,7 +1,7 @@
 let canvas= document.querySelector("#canvas")
 let ctx= canvas.getContext("2d")
 ctx.strokeStyle='black'
-    ctx.fillStyle='white'
+ctx.fillStyle='white'
 ctx.fillRect(10, 20, 250, 220)
 ctx.strokeRect(10, 20, 250, 220)
 
