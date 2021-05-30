@@ -56,9 +56,9 @@ function cambiarColor() {
  color= "#" + Math.floor(Math.random()*16777215).toString(16)
 }
 window.onclick=function(event){
-    let clickX=event.offsetX
-    let clickY=event.offsetY
-    distanciaPelota= Math.sqrt(Math.pow(clickX-x,2)+ Math.pow(clickY-y,2))
+    let disX=event.offsetX
+    let disY=event.offsetY
+    distanciaPelota= Math.sqrt(Math.pow(disX-x,2)+ Math.pow(disY-y,2))
     if (distanciaPelota<=r){
         cambiarColor()
     }
