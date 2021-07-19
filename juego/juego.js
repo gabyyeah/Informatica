@@ -1,7 +1,7 @@
 let canvas = document.querySelector("#miCanvas")
 let ctx = canvas.getContext("2d")
 
-//Finaliza el juego
+    //Finaliza el juego
 //function timeOver() {
   //clearInterval(cronometro);
  // function alerta (){
@@ -58,46 +58,63 @@ let ctx = canvas.getContext("2d")
       cronometro = setInterval(actualizaContador, 1000);
     }
 
-
-
 // oso 
-let xC = 40;
-let yC = 275;
-let r = 25;
-let color = "maroon";
+let x = 40
+let y = 275
+let r = 25
+let color = "maroon"
 
-ctx.beginPath();
-ctx.strokeStyle = color
-ctx.fillStyle = color;
+function dibujarOso(x,y,r,color){
+    ctx.beginPath()
+    ctx.strokeStyle = color
+    ctx.fillStyle = color
+    
+    ctx.arc(x, y, r, 0, 2*Math.PI)
+    ctx.stroke()
+    ctx.fill()
+}
+dibujarOso(x,y,r,color)
 
-ctx.arc(xC, yC, r, 0, 2*Math.PI);
-ctx.stroke();
-ctx.fill();
+//bosque
+function dibujarBosque(){
+    ctx.beginPath()
+    ctx.strokeStyle='darkgreen'
+    ctx.fillStyle= 'darkgreen'
+    ctx.fillRect(1100,0,400,557)
+    ctx.stroke()
+    ctx.fill()
+}  
+
+dibujarBosque()
+
+function moverYDibujar(){
+    ctx.clearRect(0,0, 1260, 700);
+    dibujarOso(x,y,r,color)
+    dibujarBosque()
+    draw()
+}
+
 
 window.onkeydown = function(event){
-    if (event.code == "ArrowRight")
-    {
-        xC=xC+50
+    if (event.code == "ArrowRight"){
+       x=x+50
+       moverYDibujar()
     }
     if (event.code=="ArrowLeft"){
-        xC=xC-50
+        x=x-50
+        moverYDibujar()
     }
     if (event.code=="ArrowUp"){
-        yC=yC-50
+        y=y-50
+        moverYDibujar()
     }
     if (event.code=="ArrowDown"){
-        yC=yC+50
+        y=y+50
+        moverYDibujar()
     }
 }
 
-//bosque
-ctx.beginPath()
-ctx.strokeStyle='darkgreen'
-ctx.fillStyle= 'darkgreen'
-ctx.fillRect(1100,0,400,557)
-ctx.stroke()
-ctx.fill()
-    
+
 //Nuevo cazador
   
 function draw() {

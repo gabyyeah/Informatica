@@ -62,3 +62,7 @@ class Cazador{
         //añado la nueva pelota al array de pelotas
         pelotas.push(pelotaNueva);
     }
+
+    ****************************************************************
+
+
