@@ -65,4 +65,20 @@ class Cazador{
 
     ****************************************************************
 
+//Nuevo obstáculo
+function draw() {
+  let x=0;
+  let vX=2;  
+  ctx.beginPath()
+  ctx.strokStyle='darkgrey';
+  ctx.fillStyle= 'darkgrey';
+  ctx.fillRect(1100,0,-20,50);
+  ctx.moveTo(x,y);
+    if (x>=1260 || x<0){
+    vX=vX*-1;
+    }
+    x=x+vX;
+}
+
+draw()
 

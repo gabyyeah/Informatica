@@ -87,48 +87,60 @@ function dibujarBosque(){
 
 dibujarBosque()
 
-function moverYDibujar(){
-    ctx.clearRect(0,0, 1260, 700);
-    dibujarOso(x,y,r,color)
-    dibujarBosque()
-    draw()
+// obstáculo en movimiento
+function dibujarObstáculo(color1, x1, y1) { 
+  ctx.beginPath()
+  ctx.strokStyle= color1;
+  ctx.fillStyle= color1;
+  ctx.fillRect(x1,y1,-20,50);
 }
 
+let x1 = 1000;
+let y1 = 0;
+let color1 = 'darkgrey';
+
+let vY = 10;
+let dT = 30;
+
+function moverYDibujarObstáculo(){
+  ctx.clearRect(0,0, 1260, 480);
+  let dY = dT/1000 *vY
+  y1 = y1 + dY;
+
+  dibujarObstáculo(color1, x1, y1)
+  dibujarOso (x,y,r,color)
+  dibujarBosque()
+}
+
+window.setInterval(moverYDibujarObstáculo, dT);
+
+// movimiento del oso
+
+function moverYDibujar(){
+  ctx.clearRect(0,0, 1260, 700);
+  dibujarOso(x,y,r,color)
+  dibujarBosque()
+  dibujarObstáculo(color1, x1, y1)
+}
 
 window.onkeydown = function(event){
-    if (event.code == "ArrowRight"){
-       x=x+50
-       moverYDibujar()
-    }
-    if (event.code=="ArrowLeft"){
-        x=x-50
-        moverYDibujar()
-    }
-    if (event.code=="ArrowUp"){
-        y=y-50
-        moverYDibujar()
-    }
-    if (event.code=="ArrowDown"){
-        y=y+50
-        moverYDibujar()
-    }
-}
-
-
-//Nuevo cazador
-  
-function draw() {
-    let x=0;
-    let vX=2;  
-    ctx.beginPath()
-    ctx.strokStyle='darkgrey';
-    ctx.fillStyle= 'darkgrey';
-    ctx.fillRect(1100,0,-20,50);
-    ctx.moveTo(x,y);
-      if (x>=1260 || x<0){
-      vX=vX*-1;
-      }
-      x=x+vX;
+  if (event.code == "ArrowRight"){
+     x=x+50
+     moverYDibujar()
   }
-  draw();
-  ctx.moveto();
+  if (event.code=="ArrowLeft"){
+    if (x>40) {
+      x=x-50}
+      moverYDibujar()
+  }
+  if (event.code=="ArrowUp"){
+    if (y>25) {
+      y=y-50}
+      moverYDibujar()
+  }
+  if (event.code=="ArrowDown"){
+    if (y<425) {
+      y=y+50}
+      moverYDibujar()
+  }
+}
