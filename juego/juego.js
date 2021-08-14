@@ -1,25 +1,11 @@
 let canvas = document.querySelector("#miCanvas")
 let ctx = canvas.getContext("2d")
 
-    //Finaliza el juego
-//function timeOver() {
-  //clearInterval(cronometro);
- // function alerta (){
-    //alert("Se acabo tu tiempo");
-   // document.querySelector("#timeOver").classList.add("visible");
-  //} 
-  
-
-  //Inicia el juego
-  document.querySelector("#juego-normal")
-  .addEventListener("click", iniciaCronometro);
-  //document.querySelector("#juego-normal")
-  //.addEventListener("click", draw);
-  
-  //cronometro
+//cronometro
   var cronometro;
+  
   function iniciaCronometro() {
-      var segundos = 10;
+      var segundos = 40;
       var minutos = 0;
       var segundosTexto;
       var minutosTexto;
@@ -43,10 +29,12 @@ let ctx = canvas.getContext("2d")
           segundosTexto = "0" + segundos;
           if (segundos == 0) { 
             //Finaliza el juego
+            clearInterval(cronometro)
             function alerta (){
-              alert("Se acabo tu tiempo");
+              alert("Se acabó tu tiempo");
             } 
             alerta()
+         
            }
         }
         if (minutos < 10) {
@@ -87,60 +75,290 @@ function dibujarBosque(){
 
 dibujarBosque()
 
-// obstáculo en movimiento
+function dibujarÁrboles(x2,y2){
+  ctx.beginPath()
+  ctx.strokeStyle='lightgreen'
+  ctx.fillStyle= 'lightgreen'
+  ctx.moveTo(x2,y2)
+  ctx.lineTo(x2-10,y2+25)
+  ctx.lineTo(x2+10, y2+25)
+  ctx.lineTo(x2,y2)
+  ctx.stroke()
+  ctx.fill()
+  ctx.beginPath()
+  ctx.strokeStyle='maroon'
+  ctx.fillStyle='maroon'
+  ctx.fillRect(x2-5,y2+25, 10, 10)
+  ctx.stroke()
+  ctx.fill()
+}
+for (let y2=5; y2<470; y2=y2+60){
+  for(let x2=1120; x2<1260; x2=x2+40){
+    dibujarÁrboles(x2,y2)
+  }
+}
+
+// lago
+let x3 = 700
+let y3 = 100
+let r3 = 60
+let color3 = "darkblue"
+
+function dibujarLago(x3,y3,r3,color3){
+  ctx.beginPath()
+  ctx.strokeStyle = color3
+  ctx.fillStyle = color3
+  
+  ctx.arc(x3, y3, r3, 0, 2*Math.PI)
+  ctx.stroke()
+  ctx.fill()
+}
+dibujarLago(x3,y3,r3,color3)
+
+// olas
+function dibujarOlas(x5, y5){
+  ctx.beginPath()
+  ctx.strokeStyle = 'lightblue'
+  ctx.moveTo(x5,y5)
+  ctx.lineTo(x5-7,y5+8)
+  ctx.moveTo(x5+7,y5+8)
+  ctx.lineTo(x5,y5)
+  ctx.stroke()
+}
+  for(let x5=700; x5<720; x5=x5+35){
+    dibujarOlas(x5,50)
+  }
+  for(let x5=680; x5<720; x5=x5+35){
+    dibujarOlas(x5,70)
+  }
+  for(let x5=660; x5<740; x5=x5+37){
+    dibujarOlas(x5,90)
+  }
+  for(let x5=680; x5<720; x5=x5+35){
+    dibujarOlas(x5,110)
+  }
+  for(let x5=700; x5<720; x5=x5+35){
+    dibujarOlas(x5,130)
+  }
+
+
+
+
+// obstáculo en movimiento 
 function dibujarObstáculo(color1, x1, y1) { 
   ctx.beginPath()
   ctx.strokStyle= color1;
   ctx.fillStyle= color1;
-  ctx.fillRect(x1,y1,-20,50);
+  ctx.fillRect(x1,y1,25,50);
 }
 
-let x1 = 1000;
-let y1 = 0;
-let color1 = 'darkgrey';
+function dibujarObstáculo2(color1, x4, y4) { 
+  ctx.beginPath()
+  ctx.strokStyle= color1;
+  ctx.fillStyle= color1;
+  ctx.fillRect(x4,y4,25,50);
+}
 
-let vY = 10;
+let y1 = 0;
+let x1 = 400
+let y4 = 0;
+let x4 = 1000
+let color1 = 'darkgrey';
+let vY = 0;
 let dT = 30;
+let vY2 = 0;
+let dT2 = 30;
 
 function moverYDibujarObstáculo(){
   ctx.clearRect(0,0, 1260, 480);
-  let dY = dT/1000 *vY
+  let vY=280;
+  let vY2=480;
+  let dY = dT/1000 *vY;
+  let dY2 = dT2/1000 *vY2;
+  if (y1<400){
   y1 = y1 + dY;
+} 
+  else {y1=0}
+
+  if (x>1100 || vidas===0) {
+    clearInterval(cronometro) 
+    vY=0
+    vY2=0
+    y1=0
+    y4=0}
+
+  if (y4<400){
+    y4 = y4 + dY2;
+  } 
+    else {y4=0}
+  
+    if (x>1100) { 
+      vY2=0;
+    y4=0}
 
   dibujarObstáculo(color1, x1, y1)
+  dibujarObstáculo2(color1, x4, y4)
+  dibujarLago(x3,y3,r3,color3)
   dibujarOso (x,y,r,color)
   dibujarBosque()
+  for (let y2=5; y2<470; y2=y2+60){
+    for(let x2=1120; x2<1260; x2=x2+40){
+      dibujarÁrboles(x2,y2)
+    }
+  }
+  for(let x5=700; x5<720; x5=x5+35){
+    dibujarOlas(x5,50)
+  }
+  for(let x5=680; x5<720; x5=x5+35){
+    dibujarOlas(x5,70)
+  }
+  for(let x5=660; x5<740; x5=x5+37){
+    dibujarOlas(x5,90)
+  }
+  for(let x5=680; x5<720; x5=x5+35){
+    dibujarOlas(x5,110)
+  }
+  for(let x5=700; x5<720; x5=x5+35){
+    dibujarOlas(x5,130)
+  }
 }
 
-window.setInterval(moverYDibujarObstáculo, dT);
+//Avisa que hubo colision
+let vidas=3
+function colision(){
+  if ( (x+25)>x1 && x<(x1+25) && y<(y1+50) && (y+25)>y1 && vidas!==0)
+   { if (vidas===1){ 
+      function alerta(){
+      vidas=0
+      clearInterval(cronometro)
+      alert("Chocaron!!. Perdiste!!");
+      } 
+      alerta()
+          }
+    else {
+    vidas= vidas-1
+     function alerta(){
+       alert("Chocaron!!. Te quedan "+vidas+" vidas");
+     } 
+     alerta()
+         }
+   }
+
+   if ( (x+25)>x4 && x<(x4+25) && y<(y4+50) && (y+25)>y4 && vidas!==0)
+   { if (vidas===1){ 
+      function alerta(){
+      vidas=0
+      clearInterval(cronometro)
+      alert("Chocaron!!. Perdiste!!");
+      } 
+      alerta()
+          }
+    else {
+    vidas= vidas-1
+     function alerta(){
+       alert("Chocaron!!. Te quedan "+vidas+" vidas");
+     } 
+     alerta()
+         }
+   }
+  }
+
+//Avisa que ganó vidas en el Lago
+function colisionLago(){
+   if ( (x+25)>x3 && x<(x3+60) && y<(y3+60) && (y+25)>y3 && vidas!==0)
+   { if (vidas===3){ 
+      function alerta(){
+      alert("Ya tienes el máximo de vidas!");
+      } 
+      alerta()
+          }
+    else {
+    vidas= vidas+1
+     function alerta(){
+       alert("Felicidades!!. Ahora tienes "+vidas+" vidas");
+     } 
+     alerta()
+         }
+   }
+  }
 
 // movimiento del oso
-
 function moverYDibujar(){
   ctx.clearRect(0,0, 1260, 700);
   dibujarOso(x,y,r,color)
   dibujarBosque()
-  dibujarObstáculo(color1, x1, y1)
-}
+  dibujarLago(x3,y3,r3,color3)
+  dibujarObstáculo(color1, 400, y1)
+  dibujarObstáculo2(color1, 1000, y4)
+  for (let y2=5; y2<470; y2=y2+60){
+    for(let x2=1120; x2<1260; x2=x2+40){
+      dibujarÁrboles(x2,y2)
+    }
+  }
+  for(let x5=700; x5<720; x5=x5+35){
+    dibujarOlas(x5,50)
+  }
+  for(let x5=680; x5<720; x5=x5+35){
+    dibujarOlas(x5,70)
+  }
+  for(let x5=660; x5<740; x5=x5+37){
+    dibujarOlas(x5,90)
+  }
+  for(let x5=680; x5<720; x5=x5+35){
+    dibujarOlas(x5,110)
+  }
+  for(let x5=700; x5<720; x5=x5+35){
+    dibujarOlas(x5,130)
+  }
+
+  }
 
 window.onkeydown = function(event){
   if (event.code == "ArrowRight"){
-     x=x+50
+     x=x+4
      moverYDibujar()
+     colision()
+     colisionLago()
   }
+     //Finaliza el juego
+      if (x>1100) { 
+        clearInterval(cronometro)
+        function alerta (){
+          alert("Ganaste!!");
+        } 
+        alerta()
+       }
   if (event.code=="ArrowLeft"){
-    if (x>40) {
-      x=x-50}
+        if (x>25) {
+      x=x-4}
       moverYDibujar()
-  }
+      colision()
+      colisionLago()
+    }
   if (event.code=="ArrowUp"){
-    if (y>25) {
-      y=y-50}
+     if (y>25) {
+      y=y-4}
       moverYDibujar()
+      colision()
+      colisionLago()
   }
   if (event.code=="ArrowDown"){
-    if (y<425) {
-      y=y+50}
+    if (y<440) {
+      y=y+4}
       moverYDibujar()
-  }
+      colision()
+      colisionLago()
+    }
 }
+  //Inicia el juego
+  document.querySelector("#juego-normal")
+  .addEventListener("click", Inicia);
+        //Inicia varias acciones
+        function Inicia() {
+         iniciaCronometro()
+         let vY=280
+         let vY2=480
+         moverYDibujarObstáculo()
+         if (vY>0){
+          window.setInterval(moverYDibujarObstáculo, dT)}
+        }
