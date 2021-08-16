@@ -1,6 +1,8 @@
 let canvas = document.querySelector("#miCanvas")
 let ctx = canvas.getContext("2d")
 
+alert ("Bienvenido al juego Oso vs. Cazadores. Eres un oso marrón que quiere llegar al bosque pero unos cazadores grises bloquean tu camino, tienes 3 vidas y perderás una cada vez que te atrape un cazador, pero puedes recuperar vidas si nadas en el lago. Llega al bosque antes de que se acabe tu tiempo!!! Para moverte usa las flechas del teclado. Para reiniciar y volver a jugar recarga la página.")
+
 //cronometro
   var cronometro;
   
@@ -30,11 +32,7 @@ let ctx = canvas.getContext("2d")
           if (segundos == 0) { 
             //Finaliza el juego
             clearInterval(cronometro)
-            function alerta (){
               alert("Se acabó tu tiempo");
-            } 
-            alerta()
-         
            }
         }
         if (minutos < 10) {
@@ -99,21 +97,20 @@ for (let y2=5; y2<470; y2=y2+60){
 }
 
 // lago
-let x3 = 700
-let y3 = 100
-let r3 = 60
+let x3 = 640
+let y3 = 40
 let color3 = "darkblue"
 
-function dibujarLago(x3,y3,r3,color3){
+function dibujarLago(x3,y3,color3){
   ctx.beginPath()
   ctx.strokeStyle = color3
   ctx.fillStyle = color3
   
-  ctx.arc(x3, y3, r3, 0, 2*Math.PI)
+  ctx.fillRect(x3,y3,120,120);
   ctx.stroke()
   ctx.fill()
 }
-dibujarLago(x3,y3,r3,color3)
+dibujarLago(x3,y3,color3)
 
 // olas
 function dibujarOlas(x5, y5){
@@ -171,8 +168,8 @@ let dT2 = 30;
 
 function moverYDibujarObstáculo(){
   ctx.clearRect(0,0, 1260, 480);
-  let vY=280;
-  let vY2=480;
+  let vY=200;
+  let vY2=300;
   let dY = dT/1000 *vY;
   let dY2 = dT2/1000 *vY2;
   if (y1<400){
@@ -180,12 +177,13 @@ function moverYDibujarObstáculo(){
 } 
   else {y1=0}
 
-  if (x>1100 || vidas===0) {
+  if (x>1100 || vidas==0) {
     clearInterval(cronometro) 
     vY=0
     vY2=0
     y1=0
-    y4=0}
+    y4=0
+  }
 
   if (y4<400){
     y4 = y4 + dY2;
@@ -194,11 +192,11 @@ function moverYDibujarObstáculo(){
   
     if (x>1100) { 
       vY2=0;
-    y4=0}
-
+    y4=0
+  }
   dibujarObstáculo(color1, x1, y1)
   dibujarObstáculo2(color1, x4, y4)
-  dibujarLago(x3,y3,r3,color3)
+  dibujarLago(x3,y3,color3)
   dibujarOso (x,y,r,color)
   dibujarBosque()
   for (let y2=5; y2<470; y2=y2+60){
@@ -221,64 +219,51 @@ function moverYDibujarObstáculo(){
   for(let x5=700; x5<720; x5=x5+35){
     dibujarOlas(x5,130)
   }
+  colision()
 }
 
 //Avisa que hubo colision
 let vidas=3
 function colision(){
   if ( (x+25)>x1 && x<(x1+25) && y<(y1+50) && (y+25)>y1 && vidas!==0)
-   { if (vidas===1){ 
-      function alerta(){
+   { if (vidas==1){ 
       vidas=0
       clearInterval(cronometro)
-      alert("Chocaron!!. Perdiste!!");
-      } 
-      alerta()
-          }
+      alert("Chocaron!!. Perdiste!!")
+    }
     else {
     vidas= vidas-1
-     function alerta(){
-       alert("Chocaron!!. Te quedan "+vidas+" vidas");
-     } 
-     alerta()
+    x=x-50
+       alert("Chocaron!!. Te quedan "+vidas+" vidas")
          }
    }
 
    if ( (x+25)>x4 && x<(x4+25) && y<(y4+50) && (y+25)>y4 && vidas!==0)
-   { if (vidas===1){ 
-      function alerta(){
+   { if (vidas==1){ 
       vidas=0
       clearInterval(cronometro)
-      alert("Chocaron!!. Perdiste!!");
-      } 
-      alerta()
-          }
+      alert("Chocaron!!. Perdiste!!")
+    }
     else {
     vidas= vidas-1
-     function alerta(){
+    x=x-50
        alert("Chocaron!!. Te quedan "+vidas+" vidas");
-     } 
-     alerta()
          }
    }
   }
 
 //Avisa que ganó vidas en el Lago
 function colisionLago(){
-   if ( (x+25)>x3 && x<(x3+60) && y<(y3+60) && (y+25)>y3 && vidas!==0)
-   { if (vidas===3){ 
-      function alerta(){
-      alert("Ya tienes el máximo de vidas!");
+   if ( (x+25)>x3 && x<(x3+120) && y<(y3+120) && (y+25)>y3 && vidas!==0)
+   { if (vidas==3){ 
+      x=x-145
+    alert("Ya tienes el máximo de vidas!")
+      
       } 
-      alerta()
-          }
     else {
     vidas= vidas+1
-     function alerta(){
-       alert("Felicidades!!. Ahora tienes "+vidas+" vidas");
-     } 
-     alerta()
-         }
+    x=x-145
+       alert("Felicidades!!. Ahora tienes "+vidas+" vidas")}
    }
   }
 
@@ -287,7 +272,7 @@ function moverYDibujar(){
   ctx.clearRect(0,0, 1260, 700);
   dibujarOso(x,y,r,color)
   dibujarBosque()
-  dibujarLago(x3,y3,r3,color3)
+  dibujarLago(x3,y3,color3)
   dibujarObstáculo(color1, 400, y1)
   dibujarObstáculo2(color1, 1000, y4)
   for (let y2=5; y2<470; y2=y2+60){
@@ -314,50 +299,51 @@ function moverYDibujar(){
   }
 
 window.onkeydown = function(event){
-  if (event.code == "ArrowRight"){
-     x=x+4
-     moverYDibujar()
-     colision()
-     colisionLago()
+             //Finaliza el juego
+           if (x>1100) { 
+            clearInterval(cronometro)
+              alert("Ganaste!!");
+           }
+if (event.code == "ArrowRight" && cronometro>0 && x<1100 && vidas>0){
+      x=x+4
+      moverYDibujar()
+      colision()
+      colisionLago()
+
   }
-     //Finaliza el juego
-      if (x>1100) { 
-        clearInterval(cronometro)
-        function alerta (){
-          alert("Ganaste!!");
-        } 
-        alerta()
-       }
-  if (event.code=="ArrowLeft"){
+
+  if (event.code=="ArrowLeft" && cronometro>0 && x<1100 && vidas>0){
         if (x>25) {
       x=x-4}
       moverYDibujar()
       colision()
       colisionLago()
     }
-  if (event.code=="ArrowUp"){
+  if (event.code=="ArrowUp"&& cronometro>0 && x<1100 && vidas>0){
      if (y>25) {
       y=y-4}
       moverYDibujar()
       colision()
       colisionLago()
   }
-  if (event.code=="ArrowDown"){
+  if (event.code=="ArrowDown" && cronometro>0 && x<1100 && vidas>0){
     if (y<440) {
       y=y+4}
       moverYDibujar()
       colision()
       colisionLago()
     }
+
 }
+
   //Inicia el juego
   document.querySelector("#juego-normal")
   .addEventListener("click", Inicia);
         //Inicia varias acciones
         function Inicia() {
          iniciaCronometro()
-         let vY=280
-         let vY2=480
+         let vY=200
+         let vY2=300
          moverYDibujarObstáculo()
          if (vY>0){
           window.setInterval(moverYDibujarObstáculo, dT)}
