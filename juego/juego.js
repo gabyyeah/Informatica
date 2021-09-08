@@ -12,6 +12,7 @@ if (count>0){
       var minutos = 0;
       var segundosTexto;
       var minutosTexto;
+     count=count+1
     
       function actualizaContador() {
         segundos--;
@@ -43,7 +44,7 @@ if (count>0){
         document.querySelector("#segundos").innerText = segundosTexto;
       }
       cronometro = setInterval(actualizaContador, 1000);
-     count=count+1
+     
     }
 
 }
