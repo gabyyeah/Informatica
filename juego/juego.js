@@ -5,8 +5,6 @@ alert ("Bienvenido al juego Oso vs. Cazadores. Eres un oso marrón que quiere ll
 
 //cronometro
   var cronometro;
-var count=0
-if (count>0){
    function iniciaCronometro() {
       var segundos = 40;
       var minutos = 0;
@@ -46,8 +44,6 @@ if (count>0){
       cronometro = setInterval(actualizaContador, 1000);
      
     }
-
-}
   
  
 // oso 
