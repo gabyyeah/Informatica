@@ -43,7 +43,11 @@ alert ("Bienvenido al juego Oso vs. Cazadores. Eres un oso marrón que quiere ll
       cronometro = setInterval(actualizaContador, 1000);
      
     }
-  
+let count=0
+  if (count=0){
+    iniciaCronometro()
+    count=count+1
+  }
  
 // oso 
 let x = 40
