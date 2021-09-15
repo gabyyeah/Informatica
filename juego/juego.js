@@ -44,7 +44,7 @@ alert ("Bienvenido al juego Oso vs. Cazadores. Eres un oso marrón que quiere ll
      
     }
 let count=0
-  if (count=0){
+  if (count==0){
     iniciaCronometro()
     count=count+1
   }
