@@ -343,8 +343,6 @@ if (event.code == "ArrowRight" && cronometro>0 && x<1100 && vidas>0){
         //Inicia varias acciones
         function Inicia() {
          iniciaCronometro()
-          let vY=200
-         let vY2=300
          moverYDibujarObstáculo()
          if (vY>0){
           window.setInterval(moverYDibujarObstáculo, dT)}
