@@ -339,7 +339,7 @@ if (event.code == "ArrowRight" && cronometro>0 && x<1100 && vidas>0){
 
   //Inicia el juego
   document.querySelector("#juego-normal")
-  .addEventListener(click, Inicia);
+  .addEventListener("click", Inicia);
         //Inicia varias acciones
         function Inicia() {
          iniciaCronometro()
