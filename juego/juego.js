@@ -44,7 +44,6 @@ alert ("Bienvenido al juego Oso vs. Cazadores. Eres un oso marrón que quiere ll
      
     }
 
-    iniciaCronometro()
 
  
 // oso 
