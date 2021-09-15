@@ -179,7 +179,7 @@ function moverYDibujarObstáculo(){
   else {y1=0}
 
   if (x>1100 || vidas==0) {
-    clearInterval(cronometro) 
+  
     vY=0
     vY2=0
     y1=0
