@@ -10,7 +10,6 @@ alert ("Bienvenido al juego Oso vs. Cazadores. Eres un oso marrón que quiere ll
       var minutos = 0;
       var segundosTexto;
       var minutosTexto;
-     count=count+1
     
       function actualizaContador() {
         segundos--;
