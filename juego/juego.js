@@ -44,7 +44,6 @@ alert ("Bienvenido al juego Oso vs. Cazadores. Eres un oso marrón que quiere ll
      
     }
 
-
  
 // oso 
 let x = 40
@@ -340,7 +339,7 @@ if (event.code == "ArrowRight" && cronometro>0 && x<1100 && vidas>0){
 
   //Inicia el juego
   document.querySelector("#juego-normal")
-  .addEventListener("click", Inicia);
+  .addEventListener(click, Inicia);
         //Inicia varias acciones
         function Inicia() {
          iniciaCronometro()
